@@ -1,6 +1,8 @@
 # OSRM docker quick and dirty instructions
 
+Modified from https://hub.docker.com/r/osrm/osrm-backend/
 
+Note, on MacOS port 5000 isn't available
 
 Next steps:
 1. map of perth pbf
@@ -10,9 +12,11 @@ Next steps:
 Okay... so can I repeat this for Perth data?
 
 Steps:
+
 1. get perth data from ~~geofabrik~~ bbbike: https://download.bbbike.org/
 2. extract and run
 
+```
 docker run -t -v "${PWD}:/data" \
     ghcr.io/project-osrm/osrm-backend osrm-extract \
     -p /opt/car.lua /data/perth.osm.pbf
@@ -26,10 +30,13 @@ docker run -t -i -p 5000:5000 \
     -v "${PWD}:/data" \
     ghcr.io/project-osrm/osrm-backend osrm-routed \
         --algorithm mld /data/perth.osrm
+```
 
 A dud call:
+
 `curl "http://127.0.0.1:5000/route/v1/driving/13.388860,52.517037;13.385983,52.496891?steps=true"`
 
+Below is some very simple python code to generate the curl command used below:
 ```
 placeA = (-31.9411869,116.0051333)
 placeB = (-31.9552672,115.8264304)
@@ -40,7 +47,6 @@ print(
 )
 ```
 
+This curl command should return valid directions through Perth:
 
-placeA:-31.9411869,116.0051333
-placeB: -31.9552672,115.8264304
 `curl "http://127.0.0.1:5000/route/v1/driving/115.8264304,-31.9552672;115.8264304,-31.9552672?steps=true"`
