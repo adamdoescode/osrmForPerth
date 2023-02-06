@@ -2,19 +2,16 @@
 
 Modified from https://hub.docker.com/r/osrm/osrm-backend/
 
-Note, on MacOS port 5000 isn't available
+Note, on MacOS port 5000 isn't available.
 
-Next steps:
-1. map of perth pbf
-2. make work in docker img
-3. see if can get osrm dirs
+[Solution to disable the AirPlay service.](https://stackoverflow.com/questions/69818376/localhost5000-unavailable-in-macos-v12-monterey)
 
-Okay... so can I repeat this for Perth data?
+What's inside:
+- map data: `perth.osm.pbf`
+- this readme `README.md`
+- not much else (the dockerfile comes from dockerhub in the first docker command)
 
-Steps:
-
-1. get perth data from ~~geofabrik~~ bbbike: https://download.bbbike.org/
-2. extract and run
+1. Extract and run
 
 ```
 docker run -t -v "${PWD}:/data" \
@@ -32,9 +29,11 @@ docker run -t -i -p 5000:5000 \
         --algorithm mld /data/perth.osrm
 ```
 
-A dud call:
+2. Make a dud call:
 
 `curl "http://127.0.0.1:5000/route/v1/driving/13.388860,52.517037;13.385983,52.496891?steps=true"`
+
+3. Make a real call:
 
 Below is some very simple python code to generate the curl command used below:
 ```
