@@ -1,5 +1,7 @@
 # OSRM docker quick and dirty instructions
 
+Data was extracted thanks to the fantastic service offered by [BBBike.org](https://extract.bbbike.org/)
+
 Modified from https://hub.docker.com/r/osrm/osrm-backend/
 
 Note, on MacOS port 5000 isn't available.
@@ -49,3 +51,5 @@ print(
 This curl command should return valid directions through Perth:
 
 `curl "http://127.0.0.1:5000/route/v1/driving/115.8264304,-31.9552672;115.8264304,-31.9552672?steps=true"`
+
+
